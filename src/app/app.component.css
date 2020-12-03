@@ -1,0 +1,11 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.poi-card {
+  max-width: 400px;
+}
+
+.poi-table {
+  width: 100%;
+}

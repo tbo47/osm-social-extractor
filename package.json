@@ -1,0 +1,46 @@
+{
+  "name": "osm-social-extractor",
+  "version": "1.0.0",
+  "scripts": {
+    "postinstall": "cd ./node_modules/protractor && npm i webdriver-manager@latest && npx webdriver-manager update --chrome=true --gecko=false",
+    "start": "protractor protractor.conf.ts",
+    "test-compilation": "tsc -p .; rimraf out-tsc",
+    "lint-fix": "tslint --fix './**/*.ts' -e './node_modules/**/*'",
+    "lint": "tslint --format verbose --project tsconfig.json"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~11.0.3",
+    "@angular/cdk": "^11.0.1",
+    "@angular/common": "~11.0.3",
+    "@angular/compiler": "~11.0.3",
+    "@angular/core": "~11.0.3",
+    "@angular/forms": "~11.0.3",
+    "@angular/material": "^11.0.1",
+    "@angular/platform-browser": "~11.0.3",
+    "@angular/platform-browser-dynamic": "~11.0.3",
+    "@angular/router": "~11.0.3",
+    "rxjs": "~6.6.3",
+    "tslib": "^2.0.3",
+    "zone.js": "~0.10.2"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.1100.3",
+    "@angular/cli": "~11.0.3",
+    "@angular/compiler-cli": "~11.0.3",
+    "@types/jasmine": "~3.6.2",
+    "@types/node": "^14.14.10",
+    "codelyzer": "^6.0.1",
+    "jasmine-core": "~3.6.0",
+    "jasmine-spec-reporter": "~5.0.0",
+    "karma": "~5.1.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage": "~2.0.3",
+    "karma-jasmine": "~4.0.1",
+    "karma-jasmine-html-reporter": "^1.5.4",
+    "protractor": "~7.0.0",
+    "ts-node": "~8.3.0",
+    "tslint": "~6.1.0",
+    "typescript": "~4.0.2"
+  }
+}

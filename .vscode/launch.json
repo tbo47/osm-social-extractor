@@ -1,0 +1,24 @@
+{
+  "version": "2.0.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "name": "debug protractor",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/protractor/bin/protractor",
+      "protocol": "inspector",
+      "args": [
+        "${workspaceFolder}/e2e/protractor.conf.js",
+        "--specs",
+        "e2e/src/app.e2e-spec.ts"
+      ]
+    },
+  ]
+}

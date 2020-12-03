@@ -1,0 +1,12 @@
+{
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "files.trimTrailingWhitespace": true,
+  "rest-client.previewOption": "exchange",
+  "telemetry.enableTelemetry": false,
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground" : "#008817",
+    "tab.activeBorder": "#ff6600",
+    "tab.unfocusedActiveBorder": "#000000"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "eamodio.gitlens",
+    "mhutchie.git-graph",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "humao.rest-client",
+    "visualstudioexptteam.vscodeintellicode",
+    "CoenraadS.bracket-pair-colorizer"
+  ]
+}

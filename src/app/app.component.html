@@ -1,0 +1,36 @@
+<mat-toolbar>
+  <span>My App</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>share</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-progress-bar mode="query" *ngIf="isLoadingResults" showFirstLastButtons></mat-progress-bar>
+
+<mat-paginator [length]="elements.length" [pageSizeOptions]="[100, 200, 1000]" [pageSize]="100"></mat-paginator>
+<table mat-table [dataSource]="elements" class="poi-table" matSort matSortActive="id" matSortDisableClear
+  matSortDirection="desc">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>#</th>
+    <td mat-cell *matCellDef="let poi">
+      <a mat-button [href]="poi.osm_url" target="osm">{{poi.id}}</a>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+    <td mat-cell *matCellDef="let poi">
+      <a mat-button *ngIf="poi.tags?.website" [title]="poi.tags?.website" [href]="poi.tags?.website"
+        target="ws">{{poi.tags?.name}}</a>
+      <a mat-button *ngIf="!poi.tags?.website" title="No website for this POI" disabled>{{poi.tags?.name}}</a>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="amenity">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Amenity</th>
+    <td mat-cell *matCellDef="let poi">{{poi.tags?.amenity}}</td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
