@@ -1,6 +1,7 @@
 import { browser, by, element } from 'protractor';
+import { Poi } from './poi';
 
-export class Util {
+export class ProtractorService {
 
     private SOCIAL_NETWORKS = ['twitter.com', 'instagram.com', 'ubereats.com', 'facebook.com'];
     private EXCLUDE = ['https://www.instagram.com/accounts/login/'];
@@ -11,12 +12,14 @@ export class Util {
         return browser.get(url);
     }
 
-    async process(url: string) {
+    async process(poi: Poi) {
+        const url = poi.tags.website;
         const links = await this.getSocialLinksFromTheWebsite(url);
         await browser.sleep(this.TIMEOUT);
         const betterLinks = await this.checkSocialLinks(links);
         await browser.sleep(this.TIMEOUT);
-        return betterLinks;
+        poi.betterLinks = betterLinks;
+        return poi;
     }
 
     private async getSocialLinksFromTheWebsite(url: string, includeIframes = true) {
@@ -51,7 +54,7 @@ export class Util {
                 socials.set('phone', phone);
             }
             if (href) {
-                console.log(`in ${url} founded ${href}`);
+                // console.log(`in ${url} founded ${href}`);
                 this.SOCIAL_NETWORKS.filter(n => href.indexOf(n) !== -1).forEach(n => socials.set(n, href));
             }
         });
