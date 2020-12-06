@@ -33,7 +33,7 @@ export class ProtractorService {
                 if (iframe && iframe.isPresent() && index !== undefined) {
                     try {
                         await browser.switchTo().frame(index); // index or iframe
-                        console.log(`success,  iframe with index: ${index} for url: ${url}`);
+                        // console.log(`success,  iframe with index: ${index} for url: ${url}`);
                     } catch (error) {
                         console.error(`error, no iframe with index: ${index} for url: ${url}`);
                     }
@@ -73,5 +73,12 @@ export class ProtractorService {
             }
         }
         return socials;
+    }
+
+    writeInFile(buffer: string) {
+        const fs = require('fs');
+        const logger = fs.createWriteStream('../extract.csv', { flags: 'a' });
+        logger.write(buffer);
+        logger.end();
     }
 }

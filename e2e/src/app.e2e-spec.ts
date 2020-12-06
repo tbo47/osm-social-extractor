@@ -1,37 +1,22 @@
-import { from } from 'rxjs';
-import { concatMap, map } from 'rxjs/operators';
-import { OverpassService } from './utils-overpass';
+import { browser } from 'protractor';
+import { Poi } from './poi';
 import { ProtractorService } from './utils-protractor';
 
-describe('get social media from websites', () => {
-
+describe('get social media from website', () => {
   beforeAll(() => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = jasmine.DEFAULT_TIMEOUT_INTERVAL * 10;
   });
 
-  let URLS = ['https://www.tortellinosf.com/'];
-  URLS = ['https://www.mountainmikespizza.com/locations/berkeley-san-pablo/'];
+  let pois = [{ tags: { website: 'https://www.gaumenkitzel.net/' } }] as Poi[];
+  pois = browser.pois;
 
-  it('testing', async () => {
-    const overpassService = new OverpassService();
-    const pois = await overpassService.getPOIs();
-    const protractorService = new ProtractorService();
-
-    await from(pois).pipe(
-      concatMap(poi => from(protractorService.process(poi))),
-      map(poi => {
-        let buffer = `${poi.id} ; https://www.openstreetmap.org/${poi.type}/${poi.id} ; ${poi.tags.website} ; `;
-        poi.betterLinks.forEach(value => buffer = buffer + value + ' ; ');
-        writeInFile(buffer + '\n');
-      })
-    ).toPromise();
+  pois.forEach(poi => {
+    it(`"${poi.tags.name}" ${poi.tags.website}`, async () => {
+      const protractorService = new ProtractorService();
+      poi = await protractorService.process(poi);
+      let buffer = `${poi.id} ; https://www.openstreetmap.org/${poi.type}/${poi.id} ; ${poi.tags.website} ; `;
+      poi.betterLinks.forEach(value => buffer = buffer + value + ' ; ');
+      protractorService.writeInFile(buffer + '\n');
+    });
   });
 });
-
-function writeInFile(buffer: string) {
-  const fs = require('fs');
-  const logger = fs.createWriteStream('log.txt', { flags: 'a' });
-  logger.write(buffer);
-  logger.end();
-}
-

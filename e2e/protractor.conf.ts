@@ -22,7 +22,7 @@ exports.config = {
   jasmineNodeOpts: {
     showColors: true,
     defaultTimeoutInterval: 30000,
-    print: function () { }
+    print: () => { }
   },
   async onPrepare() {
     require('ts-node').register({
@@ -33,5 +33,11 @@ exports.config = {
         displayStacktrace: StacktraceOption.PRETTY
       }
     }));
+
+    const OverpassService = require('./src/utils-overpass');
+    const overpassService = new OverpassService.OverpassService();
+    const pois = await overpassService.getPOIs();
+    const browser = require('protractor').browser;
+    browser.pois = pois;
   }
 };
