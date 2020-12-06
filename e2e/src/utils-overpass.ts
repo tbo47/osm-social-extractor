@@ -4,7 +4,9 @@ export class OverpassService {
   overpassUrl = 'https://overpass-api.de/api/interpreter';
 
   async getPOIs() {
-    const bbox = '37.845138693438756,-122.3001480102539,37.87644551927934,-122.27182388305664';
+    // http://tools.geofabrik.de/calc/
+    // const bbox = '37.845138693438756,-122.3001480102539,37.87644551927934,-122.27182388305664';
+    const bbox = '37.83,-122.35,37.92,-122.21';
     const q = `
         [out:json][timeout:25];
         (

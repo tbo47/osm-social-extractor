@@ -77,7 +77,7 @@ export class ProtractorService {
 
     writeInFile(buffer: string) {
         const fs = require('fs');
-        const logger = fs.createWriteStream('../extract.csv', { flags: 'a' });
+        const logger = fs.createWriteStream('extract.csv', { flags: 'a' });
         logger.write(buffer);
         logger.end();
     }
